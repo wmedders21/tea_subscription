@@ -9,4 +9,9 @@ RSpec.describe TeaCustomer, type: :model do
     it { should validate_presence_of(:customer_id) }
     it { should validate_presence_of(:tea_id) }
   end
+
+  describe 'relationships' do
+    it { should belong_to(:customer) }
+    it { should belong_to(:tea) }
+  end
 end
