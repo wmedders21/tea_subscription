@@ -68,6 +68,7 @@ end
 # Configures Shoulda-Matchers to use RSpec as the test framework and full matcher libraries for Rails
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
-    with.test_framework :rspec with.library :rails
+    with.test_framework :rspec
+    with.library :rails
   end
 end
