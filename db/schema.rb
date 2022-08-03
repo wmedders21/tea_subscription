@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2022_08_02_210507) do
 
   create_table "tea_customers", force: :cascade do |t|
     t.string "title"
-    t.integer "price"
+    t.integer "price", default: 2000
     t.integer "status", default: 0
     t.integer "frequency", default: 0
     t.bigint "customer_id"
