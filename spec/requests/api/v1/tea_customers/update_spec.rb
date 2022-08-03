@@ -4,6 +4,7 @@ RSpec.describe 'cancel subscription endpoint' do
   it 'happy path: returns info about the subscription and a 200 status' do
     customer = Customer.create(first_name: 'Patches', last_name: 'McCloud', email: 'pmccloud@test.com', address: '123 Easy Street')
     tea = Tea.create(title: 'Rooibus', description: 'Red bush tea from southern Africa', temperature: 212, brew_time: '5 minutes')
+    TeaCustomer.create(title: "#{tea.title} Subscription", customer_id: customer.id, tea_id: tea.id)
     body = { status: 1 }
     headers = {"CONTENT_TYPE" => "application/json"}
 
