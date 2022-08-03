@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :customers do
         post '/teas', to: 'tea_customers#create'
+        patch '/teas/:id', to: 'tea_customers#update'
       end
     end
   end
