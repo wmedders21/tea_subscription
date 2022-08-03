@@ -1,4 +1,11 @@
 class Api::V1::TeaCustomersController < ApplicationController
+
+  def index
+    customer = Customer.find_by(id: params[:customer_id])
+    subscriptions = customer.tea_customers
+    render json: TeaCustomerSerializer.new(subscriptions), status: 200
+  end
+
   def create
     customer = Customer.find_by(id: subscription_params[:customer_id])
     tea = Tea.find_by(id: subscription_params[:tea_id])
