@@ -69,80 +69,50 @@ GET /api/v1/customers/{customer_id}/teas
 }
 ```
 
-- Register User
+- Subscribe a customer to a tea subscription
 ```shell
-POST api/v1/users
+POST api/v1/customers/{customer_id}/teas
 Content-Type: application/json
 Accept: application/json
 body: {
-  "email": "hello@example.com",
-  "password": "password",
-  "password_confirmation": "password"
+  "tea_id": 3
 }
 ```
 ---
-```
+```json
 {
     "data": {
-        "id": "1",
-        "type": "users",
+        "id": "5",
+        "type": "subscription",
         "attributes": {
-            "email": "hello@example.com",
-            "api_key": "SOME API KEY"
+            "title": "Peppermint Subscription",
+            "price": 2000,
+            "status": "active",
+            "frequency": "monthly"
         }
     }
 }
 ```
-
-- Login User
+- Cancel a subscription
 ```shell
-POST api/v1/sessions
+PATCH /api/v1/customers/{customer_id}/teas/{tea_id}
 Content-Type: application/json
 Accept: application/json
 body: {
-  "email": "hello@example.com",
-  "password": "password"
+  "status": 1
 }
 ```
 ---
-```
+```json
 {
     "data": {
-        "id": "1",
-        "type": "users",
+        "id": "3",
+        "type": "subscription",
         "attributes": {
-            "email": "hello@example.com",
-            "api_key": "SOME API KEY"
-        }
-    }
-}
-```
-
-- Road Trip
-```shell
-POST /api/v1/road_trip
-Content-Type: application/json
-Accept: application/json
-body: {
-  "origin": "Atlanta, GA",
-  "destination": "Cincinnati, OH",
-  "api_key": "SOME API KEY"
-}
-```
----
-```
-{
-    "data": {
-        "id": "null",
-        "type": "roadtrip",
-        "attributes": {
-            "start_city": "Atlanta, GA",
-            "end_city": "Cincinnati, OH",
-            "travel_time": "7 hours, 4 minutes",
-            "weather_at_eta": {
-                "temperature": 74.3,
-                "conditions": "clear sky"
-            }
+            "title": "Irish Breakfast Subscription",
+            "price": 2000,
+            "status": "cancelled",
+            "frequency": "monthly"
         }
     }
 }
@@ -150,16 +120,10 @@ body: {
 
 ## Requirements
 
-### API
-[OpenWeather One Call API](https://openweathermap.org/api/one-call-api) follow instructions to get API key for v2.5.
-
-[MapQuest Geocoding API](https://developer.mapquest.com/documentation/geocoding-api) follow instructions to get API key.
-
-[MapQuest Directions API](https://developer.mapquest.com/documentation/directions-api) you only need the one key for MapQuest.
-
-[Microsoft Bing Image Search](portal.azure.com) You need to set up a API key for Bing through Azure.
-
-
+- Ruby 2.7.4
+- Rails 5.2.8
+- PostgreSQL 14.4
+- 
 ## Setup
 1. Clone this repository on your local machine.
 
@@ -177,20 +141,7 @@ $ bundle install
 3. Database Migration<br>
 - Before using the web application you will need to setup your databases locally by running the following command
 ```shell
-$ rails db:{drop,create,migrate}
-```
-4. Setup Figaro
-```shell
-$ bundle exec figaro install
-```
-- That will create an `config/application.yml` file.
-
-- Add your api keys to new this new file.
-```shell
-#config/application.yml
-mapquest_key: <your mapquest key here>
-open_weather_key: <your open weather key here>
-bing_images_key: <your azure key here>
+$ rails db:{drop,create,migrate,seed}
 ```
 
 5. Startup and Access<br>
@@ -201,4 +152,4 @@ bing_images_key: <your azure key here>
 $ rails s
 ```
 
-- Open Postman and [import this collection](https://github.com/wmedders21/sweater_weather/blob/main/Sweater%20Weather.postman_collection.json) to get started.
+- Open Postman and [import this collection]() to get started.
