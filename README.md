@@ -1,4 +1,4 @@
-# Sweater Weather API
+# Tea Subscription API
 
 ![ruby](https://img.shields.io/badge/Ruby-2.7.4-red)
 ![rails](https://img.shields.io/badge/Rails-5.2.8-red)
