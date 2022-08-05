@@ -40,7 +40,8 @@ class Api::V1::TeaCustomersController < ApplicationController
   end
 
   def verify_tea
-    unless Tea.find_by(id: subscription_params[:tea_id]) || Tea.find_by(id: cancellation_params[:id])
+    customer = Customer.find_by(id: cancellation_params[:customer_id])
+    unless Tea.find_by(id: subscription_params[:tea_id]) || customer.teas.find_by(id: cancellation_params[:id])
       render json: { error: 'Tea not found'}, status: 400
     end
   end
