@@ -1,6 +1,6 @@
 class Api::V1::TeaCustomersController < ApplicationController
   before_action :verify_customer
-  before_action :verify_tea, only: :create
+  before_action :verify_tea, only: [:create, :update]
 
   def index
     customer = Customer.find_by(id: params[:customer_id])
@@ -40,7 +40,7 @@ class Api::V1::TeaCustomersController < ApplicationController
   end
 
   def verify_tea
-    unless Tea.find_by(id: subscription_params[:tea_id])
+    unless Tea.find_by(id: subscription_params[:tea_id]) || Tea.find_by(id: cancellation_params[:id])
       render json: { error: 'Tea not found'}, status: 400
     end
   end
