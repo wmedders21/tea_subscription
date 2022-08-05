@@ -1,4 +1,5 @@
 class Api::V1::TeaCustomersController < ApplicationController
+  before_action :verify_customer
 
   def index
     customer = Customer.find_by(id: params[:customer_id])
@@ -29,5 +30,11 @@ class Api::V1::TeaCustomersController < ApplicationController
 
   def cancellation_params
     params.permit(:customer_id, :id, :status)
+  end
+
+  def verify_customer
+    unless Customer.find_by(id: params[:customer_id])
+      render json: { error: 'Customer not found'}, status: 400
+    end
   end
 end
