@@ -152,4 +152,4 @@ $ rails db:{drop,create,migrate,seed}
 $ rails s
 ```
 
-- Open Postman and [import this collection]() to get started.
+- Open Postman and [import this collection](https://github.com/wmedders21/tea_subscription/blob/main/Requests.postman_collection.json) to get started.
