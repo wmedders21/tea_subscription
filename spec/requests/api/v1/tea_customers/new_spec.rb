@@ -50,4 +50,18 @@ RSpec.describe 'new subscription endpoint' do
     expect(response_body).to have_key(:error)
     expect(response_body[:error]).to eq('Tea not found')
   end
+
+  it 'sad path: invalid customer id' do
+    customer = Customer.create(first_name: 'Patches', last_name: 'McCloud', email: 'pmccloud@test.com', address: '123 Easy Street')
+    tea = Tea.create(title: 'Rooibus', description: 'Red bush tea from southern Africa', temperature: 212, brew_time: '5 minutes')
+    body = { tea_id: tea.id }
+    headers = {"CONTENT_TYPE" => "application/json"}
+
+    post "/api/v1/customers/999999/teas", headers: headers, params: JSON.generate(body)
+    response_body = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response.status).to eq(400)
+    expect(response_body).to have_key(:error)
+    expect(response_body[:error]).to eq('Customer not found')
+  end
 end
