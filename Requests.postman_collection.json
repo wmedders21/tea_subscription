@@ -1,0 +1,284 @@
+{
+	"info": {
+		"_postman_id": "5d34cf0b-069e-4d6f-a766-744556516cbc",
+		"name": "Requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20786698"
+	},
+	"item": [
+		{
+			"name": "Happy: Get all subscriptions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/customers/1/teas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"customers",
+						"1",
+						"teas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Happy: New tea subscription",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"tea_id\": \"2\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/customers/1/teas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"customers",
+						"1",
+						"teas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Happy: Cancel a subscription",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"status\": 1 }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/customers/1/teas/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"customers",
+						"1",
+						"teas",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sad: Get all subscriptions (invalid customer)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/customers/999999/teas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"customers",
+						"999999",
+						"teas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sad: New tea subscription (invalid customer)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"tea_id\": \"3\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/customers/9999/teas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"customers",
+						"9999",
+						"teas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sad: New tea subscription (invalid tea)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"tea_id\": \"99999\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/customers/1/teas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"customers",
+						"1",
+						"teas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sad: Cancel a subscription (invalid customer)",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"status\": 1 }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/customers/999999/teas/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"customers",
+						"999999",
+						"teas",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sad: Cancel a subscription (invalid tea)",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"status\": 1 }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/customers/1/teas/99999",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"customers",
+						"1",
+						"teas",
+						"99999"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sad: Cancel a subscription (invalid status)",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"status\": 10 }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/customers/1/teas/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"customers",
+						"1",
+						"teas",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
