@@ -94,6 +94,8 @@ body: {
 }
 ```
 - Cancel a subscription
+  - Status 0 is "active"
+  - Status 1 is "cancelled"
 ```shell
 PATCH /api/v1/customers/{customer_id}/teas/{tea_id}
 Content-Type: application/json
