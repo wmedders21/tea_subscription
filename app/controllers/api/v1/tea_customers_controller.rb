@@ -1,4 +1,6 @@
 class Api::V1::TeaCustomersController < ApplicationController
+  before_action :verify_customer
+  before_action :verify_tea, only: [:create, :update]
 
   def index
     customer = Customer.find_by(id: params[:customer_id])
@@ -29,5 +31,18 @@ class Api::V1::TeaCustomersController < ApplicationController
 
   def cancellation_params
     params.permit(:customer_id, :id, :status)
+  end
+
+  def verify_customer
+    unless Customer.find_by(id: params[:customer_id])
+      render json: { error: 'Customer not found'}, status: 400
+    end
+  end
+
+  def verify_tea
+    customer = Customer.find_by(id: cancellation_params[:customer_id])
+    unless Tea.find_by(id: subscription_params[:tea_id]) || customer.teas.find_by(id: cancellation_params[:id])
+      render json: { error: 'Tea not found'}, status: 400
+    end
   end
 end

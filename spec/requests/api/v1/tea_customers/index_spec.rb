@@ -39,4 +39,19 @@ RSpec.describe 'a customers subscriptions endpoint' do
       expect(element[:attributes][:frequency]).to be_a(String)
     end
   end
+
+  it 'sad path: returns error for invalid customer id' do
+    customer = Customer.create(first_name: 'Patches', last_name: 'McCloud', email: 'pmccloud@test.com', address: '123 Easy Street')
+    tea_1 = Tea.create(title: 'Rooibus', description: 'Red bush tea from southern Africa', temperature: 212, brew_time: '5 minutes')
+    tea_2 = Tea.create(title: 'Irish Breakfast', description: 'Black tea. Great with cream', temperature: 200, brew_time: '3 minutes')
+    TeaCustomer.create(title: "#{tea_1.title} Subscription", customer_id: customer.id, tea_id: tea_1.id)
+    TeaCustomer.create(title: "#{tea_2.title} Subscription", customer_id: customer.id, tea_id: tea_2.id, status: 1)
+
+    get "/api/v1/customers/9999999/teas"
+    response_body = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response.status).to eq(400)
+    expect(response_body).to have_key(:error)
+    expect(response_body[:error]).to eq('Customer not found')
+  end
 end
